@@ -9,8 +9,8 @@
 | Mục | Thông tin |
 |-----|----------|
 | **Nhóm** | `<!-- Tên nhóm -->` |
-| **Lớp** | `<!-- VD: SE001.P11 -->` |
-| **Ngày báo cáo** | `<!-- DD/MM/YYYY -->` |
+| **Lớp** |ICT2.012|
+| **Ngày báo cáo** |20/05/2026|
 | **Hệ thống kiểm thử** | https://stqa.rbc.vn — v1.0 |
 
 ---
