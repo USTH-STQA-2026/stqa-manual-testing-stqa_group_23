@@ -34,9 +34,9 @@
 | TC-16 | Return book | Return successful, status reverts to "Có sẵn" | As expected | Pass | [TC16](image-17.png) | - |
 | TC-17 | Return book | Return successful BUT an overdue warning is displayed | Return successful, but NO warning is displayed on screen | Fail | [TC17](image-18.png) | BUG-01 |
 | TC-18 | Overdue handling | Record BR001 status changes to "Quá hạn" | Show 0 outcome | Fail | [TC18](image-19.png) | BUG-02 |
-| TC-19 | Member management | Fail added | Show domain invalid | Fail | [TC19](image-20.png) | - |
+| TC-19 | Member management | Fail added | Show domain invalid | Fail | [TC19](image-20.png) | BUG-03 |
 | TC-20 | Member management | Creation blocked, shows duplicate email error | As expected | Pass | [TC20](image-21.png) | - |
-| TC-21 | Member management | Shows invalid email format error | Unexpected | Fail | [TC21](image-22.png) | BUG-03 |
+| TC-21 | Member management | Shows invalid email format error | Unexpected | Fail | [TC21](image-22.png) | BUG-04 |
 | TC-22 | Member management | Shows invalid phone format error | As expected | Pass | [TC22](image-23.png) | - |
 | TC-23 | Record lookup | Displays only own records (BR001 & BR004) | As expected | Pass | [TC23](image-24.png) | - |
 | TC-24 | Record lookup | Access denied / returns an empty list | Display 0 information | Pass | [TC24](image-25.png)| - |
