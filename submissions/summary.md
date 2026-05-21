@@ -30,6 +30,7 @@
 ### Phân bổ theo nhóm chức năng
 
 | Nhóm chức năng | TC | Pass | Fail | Bug | Đánh giá |
+|----------------|----|------|------|-----|----------|
 | Đăng nhập (Login) | 5 | 5 | 0 | 0 | Hoạt động rất ổn định, phân quyền chính xác giữa các tài khoản |
 | Danh sách sách (Book listing) | 1 | 1 | 0 | 0 | Hiển thị đầy đủ số lượng và trạng thái ban đầu chính xác |
 | Tìm kiếm & Lọc sách (Search & Filter) |----|------|------|-----| Tìm kiếm theo tên/tác giả tốt, bộ lọc danh mục hoạt động đúng |
