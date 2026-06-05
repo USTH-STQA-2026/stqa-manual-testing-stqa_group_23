@@ -41,32 +41,36 @@
 | TC-23 | Record lookup | Displays only own records (BR001 & BR004) | As expected | Pass | [TC23](image-24.png) | - |
 | TC-24 | Record lookup | Access denied / returns an empty list | Display 0 information | Pass | [TC24](image-25.png)| - |
 | TC-25 | Record lookup | Displays all 5 initial borrow records | As expected | Pass | [TC25](image-26.png) | - |
-
+| TC-26 | Book search | System does not crash, displays empty list | As expected | Pass | [TC26](image-27.png) | - |
+| TC-27 | Book filter | System show all books | Unexpected | Fail | [TC27](image-28.png) | BUG-05 |
+| TC-28 | Member management | Blocks submission, shows required name error | As expected | Pass | [TC28](image-30.png) | - |
+| TC-29 | System Reset | System reloads data but logs user out | Unexpected | Fail | [TC29](image-29.png) | BUG-05 |
+| TC-30 | Login | System auto-trims space and logs in successfully | As expected | Pass | [TC30](image-31.png) | - |
 ---
 
 ## Tổng hợp kết quả
 
 |      Chỉ số       | Giá trị |
 |-------------------|---------|
-| Tổng số test case |    25   |
-|        Pass       |    21   |
-|        Fail       |    4    |
+| Tổng số test case |    30   |
+|        Pass       |    24   |
+|        Fail       |    6    |
 |        Blocked    |    0    |
 |        Not Run    |    0    |
-|   **Tỷ lệ Pass**  | **84%** |
+|   **Tỷ lệ Pass** | **80%** |
 
 ### Kết quả theo nhóm chức năng
 
 | Nhóm | Tổng TC | Pass | Fail | Tỷ lệ Pass |
 |------|---------|------|------|------------|
-| Login | 5 | 5 | 0 | 100% |
-| Book listing | 1 | 1 | 0 | 100% |
-| Book search | 3 | 3 | 0 | 100% |
-| Book filter | 1 | 1 | 0 | 100% |
+| Login | 6 | 6 | 0 | 100% |
+| Book listing & search | 5 | 5 | 0 | 100% |
+| Book filter | 2 | 1 | 1 | 50% |
 | Borrow book | 5 | 5 | 0 | 100% |
 | Return book | 2 | 1 | 1 | 50% |
 | Overdue handling | 1 | 0 | 1 | 0% |
-| Member management | 4 | 2 | 2 | 50% |
+| Member management | 5 | 3 | 2 | 60% |
 | Record lookup | 3 | 3 | 0 | 100% |
+| System Reset | 1 | 0 | 1 | 0% |
 
 ```

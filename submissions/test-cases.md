@@ -96,17 +96,23 @@
 | TC-23 | Member can only view their own borrow records | Logged in as `ba.nguyen@email.com` | 1. Go to "Mượn/Trả" tab.<br>2. Check the records list. | Personal data | Displays only BR001 and BR004. DOES NOT display dam.tran's BR002 record. | REQ-08 | EP |
 | TC-24 | Member cannot search for another member's record | Logged in as `ba.nguyen@email.com` | 1. Attempt to search for another user's record ID. | Search query: `BR002` or MEM003 ID | Access is denied / returns an empty list. | REQ-08 | EP |
 | TC-25 | Librarian can view all borrow records | Logged in as Librarian | 1. Go to "Mượn/Trả" tab.<br>2. View the list. | None | Displays all 5 initial borrow records. | REQ-08 | EP |
-
+| TC-26 | System handles special characters/SQL injection attempts in search safely | Logged in to the system, at "Sách" tab | 1. Enter SQL injection payload in search bar.<br>2. Click Search. | Keyword: `1=1 ">??` | System does not crash. Displays an empty list with the message "Không tìm thấy sách nào". | REQ-03 | EP |
+| TC-27 | Search function handles whitespace-only inputs correctly | Logged in to the system, at "Sách" tab | 1. Enter multiple spaces in the "Thể loại"search bar.<br>2. Click Search. | Keyword: `"   "` (3 spaces) | System display all books without throwing an application error not an empty list with the message "Không tìm thấy sách nào". | REQ-03 | EP |
+| TC-28 | Member creation fails when mandatory fields are left blank | Logged in as Librarian, at "Thêm thành viên" tab | 1. Leave the "Name" field blank.<br>2. Fill in valid Email and Phone.<br>3. Click Save. | Name: `""`<br>Email: `new@email.com`<br>Phone: `0912345678` | System blocks submission. A validation error explicitly stating that the Name field is required is displayed. | REQ-07 | EP |
+| TC-29 | Librarian can successfully force-reset the system data without losing session | Logged in as Librarian | 1. Click the reset button on the app bar.<br>2. Confirm the reset action. | Click reset button | System reloads data to initial state. Librarian remains logged in. | REQ-01 | EP |
+| TC-30 | Login gracefully handles trailing whitespace in email input | At Login page | 1. Enter email with a trailing space at the end.<br>2. Enter valid password.<br>3. Click Login. | Email: `  ba.nguyen@email.com  ` <br>Pass: `password123` | System automatically trims the whitespace and logs the user in successfully. | REQ-01 | EP |
 ---
 
 ## Tổng hợp
 
 | Nhóm chức năng | Số TC | REQ phủ | Kỹ thuật IDM áp dụng |
 |----------------|-------|---------|----------------------|
-| Login | 5 | REQ-01 | EP |
-| Book listing, searching, and filtering | 5 | REQ-02, REQ-03 | EP |
+| Login | 6 | REQ-01 | EP |
+| Book listing & search | 5 | REQ-02, REQ-03 | EP |
+| Book filter | 2 | REQ-03 | EP |
 | Borrow book | 5 | REQ-04 | EP, BVA, Decision Table |
 | Return & Overdue handling | 3 | REQ-05, REQ-06 | EP, BVA |
-| Member management | 4 | REQ-07 | EP, BVA |
+| Member management | 5 | REQ-07 | EP, BVA |
 | Borrow record lookup | 3 | REQ-08 | EP |
-| **Total** | **25** | **REQ-01 → REQ-08** | **EP, BVA, Decision Table** |
+| System Reset | 1 | REQ-01 | EP |
+| **Total** | **30** | **REQ-01 → REQ-08** | **EP, BVA, Decision Table** |

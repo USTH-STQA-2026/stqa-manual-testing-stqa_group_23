@@ -19,36 +19,27 @@
 
 | Chỉ số | Giá trị |
 |--------|---------|
-| Tổng số test case | 25 |
-| Pass | 21 |
-| Fail | 4 |
+| Tổng số test case | 30 |
+| Pass | 24 |
+| Fail | 6 |
 | Blocked | 0 |
 | Not Run | 0 |
-| **Tỷ lệ Pass** | 84% |
-| **Số bug phát hiện** | 4 |
+| **Tỷ lệ Pass** | 80% |
+| **Số bug phát hiện** | 6 |
 
 ### Phân bổ theo nhóm chức năng
 
 | Nhóm chức năng | TC | Pass | Fail | Bug | Đánh giá |
 |----------------|----|------|------|-----|----------|
-| Đăng nhập (Login) | 5 | 5 | 0 | 0 | Hoạt động rất ổn định, phân quyền chính xác giữa các tài khoản |
-| Danh sách sách (Book listing) | 1 | 1 | 0 | 0 | Hiển thị đầy đủ số lượng và trạng thái ban đầu chính xác |
-| Tìm kiếm & Lọc sách (Search & Filter) | 4 | 4 | 0 | 0 | Tìm kiếm theo tên/tác giả tốt, bộ lọc danh mục hoạt động đúng |
-| Mượn sách (Borrow book) | 5 | 5 | 0 | 0 | Kiểm tra tốt các ràng buộc về số lượng sách, trạng thái tài khoản |
-| Trả sách (Return book) | 2 | 1 | 1 | 1 | Trả sách thành công nhưng không cảnh báo khi thành viên trả muộn |
-| Xử lý quá hạn (Overdue handling) | 1 | 0 | 1 | 1 | Lỗi nghiêm trọng: Nút quét kiểm tra quá hạn không hoạt động |
-| Quản lý thành viên (Member management) | 4 | 2 | 2 | 2 | Lỗi logic: Validate Email bị ngược (cho qua email sai, chặn email đúng) |
-| Tra cứu lịch sử mượn (Record lookup) | 3 | 3 | 0 | 0 | Bảo mật tốt, thành viên không xem được bản ghi của người khác |
-
-
-
-### Phân bổ bug theo mức độ
-
-| Mức độ | Số lượng | Bug IDs |
-|--------|---------|---------|
-| High | 1 | BUG-02 |
-| Medium | 3 | BUG-01, BUG-03, BUG-04 |
-| Low | 0 | |
+| Đăng nhập (Login) | 6 | 6 | 0 | 0 | Hoạt động rất ổn định, tự động cắt khoảng trắng (trim space) tốt. |
+| Danh sách & Tìm kiếm sách | 5 | 5 | 0 | 0 | Xử lý an toàn các ký tự đặc biệt, chặn SQL Injection hiệu quả. |
+| Lọc sách (Book filter) | 2 | 1 | 1 | 1 | Lỗi bộ lọc: Trả về toàn bộ sách thay vì lọc theo danh mục được chọn. |
+| Mượn sách (Borrow book) | 5 | 5 | 0 | 0 | Kiểm tra tốt các ràng buộc về số lượng và trạng thái tài khoản. |
+| Trả sách (Return book) | 2 | 1 | 1 | 1 | Trả sách thành công nhưng thiếu thông báo cảnh báo khi trả muộn. |
+| Xử lý quá hạn (Overdue) | 1 | 0 | 1 | 1 | Lỗi nghiêm trọng: Quét kiểm tra quá hạn không thay đổi trạng thái sách. |
+| Quản lý thành viên | 5 | 3 | 2 | 2 | Lỗi logic Validation Email bị ngược (chặn email đúng, cho qua email sai). |
+| Tra cứu lịch sử mượn | 3 | 3 | 0 | 0 | Bảo mật phân quyền hiển thị dữ liệu hoạt động chính xác. |
+| Đặt lại hệ thống (Reset) | 1 | 0 | 1 | 1 | Lỗi UX: Xóa luôn phiên đăng nhập của người dùng khi thực hiện reset data. |
 
 ---
 
@@ -82,15 +73,14 @@
 
 ## 5. Đề xuất ưu tiên sửa lỗi
 
-> 💡 Đây là phần **Quality Assurance**: bạn không chỉ tìm lỗi mà còn **đề xuất thứ tự ưu tiên** sửa chữa và đánh giá tác động.
-> Nêu rõ tiêu chí ưu tiên: dựa vào **severity** (mức độ nghiêm trọng kỹ thuật) và/hoặc **priority** (mức độ ưu tiên kinh doanh).
-
 | Thứ tự | Bug | Mức độ | Lý do ưu tiên |
 |--------|-----|--------|---------------|
-| 1 | BUG-02 | High | Ưu tiên hàng đầu (Blocker cho vận hành): Lỗi này làm gãy hoàn toàn luồng quản lý của Thủ thư. Nếu không sửa, thư viện không thể xác định được ai đang nợ sách quá hạn để gửi yêu cầu thu hồi. |
-| 2 | BUG-04 | Medium | Ảnh hưởng trực tiếp đến người dùng: Lỗi chặn email đúng khiến các thành viên mới không thể đăng ký tài khoản bằng các email phổ thông. Cần sửa ngay để giải phóng luồng đăng ký. |
-| 3 | BUG-03 | Medium | Ảnh hưởng đến tính toàn vẹn dữ liệu: Cho phép lưu email rác/sai định dạng sẽ khiến hệ thống tích tụ dữ liệu bẩn, làm hỏng tính năng gửi thông báo tự động (Notification) sau này. |
-| 4 | BUG-01 | Medium | Cải thiện trải nghiệm & Nhận thức: Lỗi này không chặn luồng nghiệp vụ chính (sách vẫn được trả về kho "Có sẵn"), nhưng cần bổ sung sớm để người dùng nhận thức được việc họ đã vi phạm thời hạn mượn sách. |
+| 1 | BUG-02 | High | Ưu tiên hàng đầu (Blocker): Gãy hoàn toàn luồng quản lý quá hạn của Thủ thư, làm mất khả năng thu hồi sách. |
+| 2 | BUG-04 | Medium | Ảnh hưởng trực tiếp: Lỗi chặn email đúng khiến hệ thống không thể nạp thêm các thành viên mới hợp lệ. |
+| 3 | BUG-05 | Medium | Lỗi cốt lõi: Bộ lọc danh mục bị liệt, ảnh hưởng trực tiếp đến luồng tra cứu sách của người dùng. |
+| 4 | BUG-03 | Medium | Toàn vẹn dữ liệu: Cho phép lưu email sai định dạng sẽ tạo ra dữ liệu rác, hỏng luồng thông báo tự động sau này. |
+| 5 | BUG-01 | Medium | Trải nghiệm: Cần cảnh báo trả muộn để nhắc nhở và nâng cao ý thức tuân thủ thời hạn của người mượn. |
+| 6 | BUG-06 | Low | Trải nghiệm (UX): Nút Reset Data văng đăng nhập gây phiền toái cho Thủ thư, nhưng không làm gãy luồng nghiệp vụ chính của người dùng.
 
 ---
 

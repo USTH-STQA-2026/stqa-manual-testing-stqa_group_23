@@ -184,3 +184,94 @@ Prevents the registration of legitimate users, directly impacting the core funct
 
 **Proposed Solution:**
 Review the email validation logic or the third-party domain verification API being used. Ensure standard domains (like `@email.com`) are not falsely flagged as invalid by overly strict or broken validation rules.
+
+---
+## BUG-05
+
+| Attribute | Detail |
+|-----------|---------|
+| **Bug ID** | BUG-05 |
+| **Related TC** | TC-27 |
+| **Related REQ** | REQ-03 |
+| **Severity** | Medium |
+| **Reporter** | STQA_Group_23 |
+| **Date** | 05/06/2026 |
+| **Status** | Open |
+
+**Title:**
+The category filter unexpectedly displays all books instead of filtering them.
+
+**Environment:**
+- Browser: Zen-browser
+- OS: Linux
+- UI Language: Vietnamese
+
+**Preconditions:**
+Logged into the system and navigated to the "Sách" (Books) tab.
+
+**Steps to reproduce:**
+1. Open the category filter dropdown.
+2. Select a specific category.
+3. Observe the displayed book list.
+
+**Expected Result:**
+The system must filter and display strictly the books belonging to the selected category.
+
+**Actual Result:**
+Unexpected behavior: The system displays all books, completely ignoring the selected filter criteria.
+
+**Impact:**
+Users cannot filter books by category, significantly degrading the search experience.
+
+**Evidence:**
+[image-28.png]
+
+**Proposed Solution:**
+Review the frontend state management or the backend API query for the filter feature. Ensure the selected category parameter is correctly passed and processed to filter the array of books.
+
+---
+
+## BUG-06
+
+| Attribute | Detail |
+|-----------|---------|
+| **Bug ID** | BUG-06 |
+| **Related TC** | TC-29 |
+| **Related REQ** | REQ-01 |
+| **Severity** | Low |
+| **Reporter** | STQA_Group_23 |
+| **Date** | 05/06/2026 |
+| **Status** | Open |
+
+**Title:**
+System unexpectedly logs the Librarian out when triggering the "Reset Data" function.
+
+**Environment:**
+- Browser: Zen-browser
+- OS: Linux
+- UI Language: Vietnamese
+
+**Preconditions:**
+Successfully logged in with a Librarian account.
+
+**Steps to reproduce:**
+1. Click the reset button on the top App Bar.
+2. Confirm the reset action.
+3. Observe the system's response and user session status.
+
+**Expected Result:**
+The system should reset the library data (books, members, records) to the initial seed state while keeping the Librarian's session active.
+
+**Actual Result:**
+The system resets the data but simultaneously clears the authentication state, forcing the user back to the Login page (Logout).
+
+**Impact:**
+Poor user experience (UX). The Librarian is forced to re-enter credentials every time they reset the testing data.
+
+**Evidence:**
+[image-29.png]
+
+**Proposed Solution:**
+Modify the reset function in the code. Ensure it only clears the `books`, `members`, and `records` data from local storage/state, but strictly preserves the `currentUser` or `authToken` data.
+
+---
