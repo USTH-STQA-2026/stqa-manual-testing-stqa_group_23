@@ -6,8 +6,8 @@
 
 | Thông tin | |
 |---|---|
-| **Nhóm** | `<!-- Tên nhóm -->` |
-| **Ngày tạo** | `<!-- DD/MM/YYYY -->` |
+| **Nhóm** | STQA_Group_23 |
+| **Ngày tạo** | 20/05/2026|
 | **Hệ thống** | https://stqa.rbc.vn |
 | **Tham chiếu** | SRS v1.0 |
 
@@ -70,14 +70,49 @@
 <!-- Mỗi TC phải ánh xạ ngược về ít nhất 1 dòng trong bảng IDM ở Bước 1. -->
 
 | Mã TC | Mục tiêu kiểm thử | Tiền điều kiện | Bước thực hiện | Dữ liệu đầu vào | Kết quả mong đợi | REQ | Kỹ thuật |
-|-------|-------------------|---------------|---------------|-----------------|------------------|-----|---------|
-| | | | | | | | |
-
+|-------|-------------------|----------------|----------------|-----------------|------------------|-----|----------|
+| TC-01 | Successful login with Librarian account | At Login page | 1. Enter email.<br>2. Enter password.<br>3. Click Login. |Email: `librarian@library.com`<br>Pass: `admin123` | Redirects to the homepage. AppBar displays "Nguyễn Thủ Thư - Thủ thư". | REQ-01 | EP |
+| TC-02 | Successful login with Member account | At Login page | 1. Enter email.<br>2. Enter password.<br>3. Click Login. | Email: `ba.nguyen@email.com`<br>Pass: `password123` | Redirects to the homepage. AppBar displays "Nguyễn Học Bá - Thành viên". | REQ-01 | EP |
+| TC-03 | Login failed due to incorrect password | At Login page | 1. Enter email.<br>2. Enter incorrect password.<br>3. Click Login. | Email: `ba.nguyen@email.com`<br>Pass: `wrong_pass` | Displays error message: "Mật khẩu không đúng". | REQ-01 | EP |
+| TC-04 | Login failed due to non-existent email | At Login page | 1. Enter incorrect email.<br>2. Enter password.<br>3. Click Login. | Email: `nobody@test.com`<br>Pass: `password123` | Displays error message: "Không tìm thấy thành viên". | REQ-01 | EP |
+| TC-05 | Login failed due to empty fields | At Login page | 1. Leave email and password blank.<br>2. Click Login. | Email: `""`<br>Pass: `""` | Displays error message: "Vui lòng nhập email và mật khẩu". | REQ-01 | EP |
+| TC-06 | View initial book list | Successfully logged in | 1. Navigate to "Sách" tab.<br>2. Check the displayed list. | None | Displays all 20 book titles. BOOK003 shows status "Đã mượn", BOOK001 shows "Có sẵn". | REQ-02 | EP |
+| TC-07 | Search books by title | At "Sách" tab | 1. Enter keyword in the search bar.<br>2. Click Search. | Keyword: `flutter` | Displays BOOK001: "Lập trình Flutter cơ bản". | REQ-03 | EP |
+| TC-08 | Search books by author | At "Sách" tab | 1. Enter author's name.<br>2. Click Search. | Keyword: `Nguyễn Minh Đức` | Displays 2 books: BOOK001 and BOOK009. | REQ-03 | EP |
+| TC-09 | Search books with no results | At "Sách" tab | 1. Enter a random keyword.<br>2. Click Search. | Keyword: `abcdxyz123` | List is empty, displays message: "Không tìm thấy sách". | REQ-03 | EP |
+| TC-10 | Filter books by category | At "Sách" tab | 1. Open category filter.<br>2. Select a category. | Category: `Kỹ năng mềm` | Displays only BOOK006 and BOOK016. | REQ-03 | EP |
+| TC-11 | Successful book borrowing | Logged in as `biet.hoang@email.com` | 1. Find an "Available" book.<br>2. Click "Mượn". | Book: `BOOK001` | Borrow successful. Book status changes to "Đã mượn". Current borrowed books count = 2. | REQ-04 | Decision Table, BVA |
+| TC-12 | Borrow failed | Logged in as `dam.tran@email.com` | 1. Find a book currently borrowed.<br>2. Attempt to click "Mượn". | Book: `BOOK003` | Borrowing is not allowed. | REQ-04 | Decision Table, EP |
+| TC-13 | Borrow failed due to "Suspended" account status | Logged in as `cu.le@email.com` | 1. Select an "Available" book.<br>2. Click "Mượn". | Book: `BOOK004` | Borrow request denied, displays an error message regarding "Tạm ngưng" status. | REQ-04 | Decision Table, EP |
+| TC-14 | Borrow failed due to "Expired" account status | Logged in as `binh.pham@email.com` | 1. Select an "Available" book.<br>2. Click "Mượn". | Book: `BOOK004` | Borrow request denied, displays an error message regarding "Hết hạn" status. | REQ-04 | Decision Table, EP |
+| TC-15 | Borrow failed due to reaching the maximum limit | Logged in as `dam.tran@email.com`, successfully borrowed 3 books in a row | 1. Select a 4th book.<br>2. Click "Mượn". | 4th Book: `BOOK010` | Request denied. Displays an error message indicating the 3-book limit is exceeded. | REQ-04 | Decision Table, BVA |
+| TC-16 | Successful book return | Logged in as `biet.hoang@email.com`, borrowing BR003 | 1. Go to "Mượn/Trả" tab.<br>2. Find the borrow record.<br>3. Click "Trả". | Record: `BR003` | Return successful, no warnings. BOOK013 status reverts to "Có sẵn". | REQ-05 | EP, BVA |
+| TC-17 | Book return with an overdue warning | Logged in as `ba.nguyen@email.com`, borrowing BR001 | 1. Go to "Mượn/Trả" tab.<br>2. Find the record.<br>3. Click "Trả". | Record: `BR001` | Return successful BUT a clear overdue warning is displayed. | REQ-05 | EP, BVA |
+| TC-18 | Librarian updates overdue books | Logged in as Librarian | 1. Click "Kiểm tra quá hạn".<br>2. Review the borrow records list. | "Kiểm tra quá hạn" button | Record BR001 status changes from "Đang mượn" to "Quá hạn". | REQ-06 | EP |
+| TC-19 | Add new member | Logged in as Librarian, at "Thành viên" tab | 1. Click Add Member.<br>2. Fill in the form.<br>3. Save. | Name: `some`, Email: `some@email.com`, Phone: `0987654321` | Fail added | REQ-07 | EP, BVA |
+| TC-20 | Add member failed: Duplicate email | Logged in as Librarian, at "Thành viên" tab | 1. Click Add Member.<br>2. Fill in the form.<br>3. Save. | Duplicate Email: `ba.nguyen@email.com` | Displays an error email invalid; creation is blocked. | REQ-07 | EP |
+| TC-21 | Add new member : Valid email format | Logged in as Librarian, at "Thành viên" tab | 1. Fill in the information.<br>2. Save. | Email: `user@domain` | Displays success regarding invalid email format. | REQ-07 | EP |
+| TC-22 | Add member failed: Invalid phone number format | Logged in as Librarian, at "Thành viên" tab | 1. Fill in the information.<br>2. Save. | Phone: `012345` | Displays an error regarding invalid phone format. | REQ-07 | BVA |
+| TC-23 | Member can only view their own borrow records | Logged in as `ba.nguyen@email.com` | 1. Go to "Mượn/Trả" tab.<br>2. Check the records list. | Personal data | Displays only BR001 and BR004. DOES NOT display dam.tran's BR002 record. | REQ-08 | EP |
+| TC-24 | Member cannot search for another member's record | Logged in as `ba.nguyen@email.com` | 1. Attempt to search for another user's record ID. | Search query: `BR002` or MEM003 ID | Access is denied / returns an empty list. | REQ-08 | EP |
+| TC-25 | Librarian can view all borrow records | Logged in as Librarian | 1. Go to "Mượn/Trả" tab.<br>2. View the list. | None | Displays all 5 initial borrow records. | REQ-08 | EP |
+| TC-26 | System handles special characters/SQL injection attempts in search safely | Logged in to the system, at "Sách" tab | 1. Enter SQL injection payload in search bar.<br>2. Click Search. | Keyword: `1=1 ">??` | System does not crash. Displays an empty list with the message "Không tìm thấy sách nào". | REQ-03 | EP |
+| TC-27 | Search function handles whitespace-only inputs correctly | Logged in to the system, at "Sách" tab | 1. Enter multiple spaces in the "Thể loại"search bar.<br>2. Click Search. | Keyword: `"   "` (3 spaces) | System display all books without throwing an application error not an empty list with the message "Không tìm thấy sách nào". | REQ-03 | EP |
+| TC-28 | Member creation fails when mandatory fields are left blank | Logged in as Librarian, at "Thêm thành viên" tab | 1. Leave the "Name" field blank.<br>2. Fill in valid Email and Phone.<br>3. Click Save. | Name: `""`<br>Email: `new@email.com`<br>Phone: `0912345678` | System blocks submission. A validation error explicitly stating that the Name field is required is displayed. | REQ-07 | EP |
+| TC-29 | Librarian can successfully force-reset the system data without losing session | Logged in as Librarian | 1. Click the reset button on the app bar.<br>2. Confirm the reset action. | Click reset button | System reloads data to initial state. Librarian remains logged in. | REQ-01 | EP |
+| TC-30 | Login gracefully handles trailing whitespace in email input | At Login page | 1. Enter email with a trailing space at the end.<br>2. Enter valid password.<br>3. Click Login. | Email: `  ba.nguyen@email.com  ` <br>Pass: `password123` | System automatically trims the whitespace and logs the user in successfully. | REQ-01 | EP |
 ---
 
 ## Tổng hợp
 
 | Nhóm chức năng | Số TC | REQ phủ | Kỹ thuật IDM áp dụng |
 |----------------|-------|---------|----------------------|
-| | | | |
-| **Tổng** | **<!-- ≥ 20 -->** | | |
+| Login | 6 | REQ-01 | EP |
+| Book listing & search | 5 | REQ-02, REQ-03 | EP |
+| Book filter | 2 | REQ-03 | EP |
+| Borrow book | 5 | REQ-04 | EP, BVA, Decision Table |
+| Return & Overdue handling | 3 | REQ-05, REQ-06 | EP, BVA |
+| Member management | 5 | REQ-07 | EP, BVA |
+| Borrow record lookup | 3 | REQ-08 | EP |
+| System Reset | 1 | REQ-01 | EP |
+| **Total** | **30** | **REQ-01 → REQ-08** | **EP, BVA, Decision Table** |
