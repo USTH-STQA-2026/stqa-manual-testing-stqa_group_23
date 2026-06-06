@@ -6,8 +6,14 @@
 | **Date of Report** | 20/05/2026 |
 
 ---
-
+**Environment:**
+- Browser: Zen-browser
+- OS: Linux
+- UI Language: Vietnamese and English
+---
 ## BUG-01
+**Title:**
+The system does not display an overdue warning when a member returns a late book.
 
 | Attribute | Detail |
 |-----------|---------|
@@ -18,14 +24,6 @@
 | **Reporter** | Tran Duc Minh |
 | **Date** | 20/05/2026 |
 | **Status** | Open |
-
-**Title:**
-The system does not display an overdue warning when a member returns a late book.
-
-**Environment:**
-- Browser: Zen-browser
-- OS: Linux
-- UI Language: Vietnamese
 
 **Preconditions:**
 Successfully logged in with a member account (`ba.nguyen@email.com`). The member has a borrow record that is past its due date (`BR001`).
@@ -53,6 +51,8 @@ Implement logic to compare the actual return date with the due date. If it excee
 ---
 
 ## BUG-02
+**Title:**
+The "Kiểm tra quá hạn" (Check Overdue) function does not update the status of overdue borrow records.
 
 | Attribute | Detail |
 |-----------|---------|
@@ -63,14 +63,6 @@ Implement logic to compare the actual return date with the due date. If it excee
 | **Reporter** | Tran Duc Minh |
 | **Date** | 20/05/2026 |
 | **Status** | Open |
-
-**Title:**
-The "Kiểm tra quá hạn" (Check Overdue) function does not update the status of overdue borrow records.
-
-**Environment:**
-- Browser: Zen-browser
-- OS: Linux
-- UI Language: Vietnamese
 
 **Preconditions:**
 Successfully logged in with a Librarian account. There is at least one overdue borrow record currently in the system (e.g., `BR001`).
@@ -98,6 +90,8 @@ Review the backend query invoked when the "Kiểm tra quá hạn" button is trig
 ---
 
 ## BUG-03
+**Title:**
+The system fails to validate and accepts incomplete email formats when adding a new member.
 
 | Attribute | Detail |
 |-----------|---------|
@@ -108,14 +102,6 @@ Review the backend query invoked when the "Kiểm tra quá hạn" button is trig
 | **Reporter** | Tran Duc Minh |
 | **Date** | 20/05/2026 |
 | **Status** | Open |
-
-**Title:**
-The system fails to validate and accepts incomplete email formats when adding a new member.
-
-**Environment:**
-- Browser: Zen-browser
-- OS: Linux
-- UI Language: Vietnamese
 
 **Preconditions:**
 Successfully logged in with a Librarian account. Navigated to the "Thêm thành viên" (Add Member) form.
@@ -144,6 +130,9 @@ Implement a standard Regex pattern (e.g., `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a
 
 ## BUG-04
 
+**Title:**
+The system incorrectly rejects a valid email address format, claiming the domain is invalid.
+
 | Attribute | Detail |
 |-----------|---------|
 | **Bug ID** | BUG-04 |
@@ -153,14 +142,6 @@ Implement a standard Regex pattern (e.g., `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a
 | **Reporter** | Tran Duc Minh |
 | **Date** | 20/05/2026 |
 | **Status** | Open |
-
-**Title:**
-The system incorrectly rejects a valid email address format, claiming the domain is invalid.
-
-**Environment:**
-- Browser: Zen-browser
-- OS: Linux
-- UI Language: Vietnamese
 
 **Preconditions:**
 Successfully logged in with a Librarian account. Navigated to the "Thêm thành viên" (Add Member) form.
@@ -188,6 +169,9 @@ Review the email validation logic or the third-party domain verification API bei
 ---
 ## BUG-05
 
+**Title:**
+The category filter unexpectedly displays all books instead of filtering them.
+
 | Attribute | Detail |
 |-----------|---------|
 | **Bug ID** | BUG-05 |
@@ -197,14 +181,6 @@ Review the email validation logic or the third-party domain verification API bei
 | **Reporter** | STQA_Group_23 |
 | **Date** | 05/06/2026 |
 | **Status** | Open |
-
-**Title:**
-The category filter unexpectedly displays all books instead of filtering them.
-
-**Environment:**
-- Browser: Zen-browser
-- OS: Linux
-- UI Language: Vietnamese
 
 **Preconditions:**
 Logged into the system and navigated to the "Sách" (Books) tab.
@@ -233,6 +209,9 @@ Review the frontend state management or the backend API query for the filter fea
 
 ## BUG-06
 
+**Title:**
+System unexpectedly logs the Librarian out when triggering the "Reset Data" function.
+
 | Attribute | Detail |
 |-----------|---------|
 | **Bug ID** | BUG-06 |
@@ -242,14 +221,6 @@ Review the frontend state management or the backend API query for the filter fea
 | **Reporter** | STQA_Group_23 |
 | **Date** | 05/06/2026 |
 | **Status** | Open |
-
-**Title:**
-System unexpectedly logs the Librarian out when triggering the "Reset Data" function.
-
-**Environment:**
-- Browser: Zen-browser
-- OS: Linux
-- UI Language: Vietnamese
 
 **Preconditions:**
 Successfully logged in with a Librarian account.
